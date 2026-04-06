@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Repasos 😼</title>
+  <title>Repasos</title>
   <style>
     :root {
       --bg: #0a0f2c;
@@ -650,7 +650,7 @@
     <section class="hero">
       <div class="hero-top">
         <div>
-          <div class="brand">🩺 MediGuía Study</div>
+          <div class="brand">📘 Repasos</div>
           <h1>Repasa por tema o en modo mixto</h1>
           <p>
             Elige entre <strong>Posiciones Quirúrgicas</strong>, <strong>Instrumentación Quirúrgica</strong>,
@@ -740,7 +740,7 @@
     </section>
 
     <div class="footer-note">
-      Hecho para repasar con contenido cargado manualmente. Después puedes seguir agregando más preguntas y temas.
+      Hecho para estudiar y repasar por temas con varios modos interactivos.
     </div>
   </div>
 
@@ -796,7 +796,9 @@
           { question: "¿Qué posición se usa en cirugías de espalda?", accepted: ["decúbito prono", "prono"], explanation: "El prono coloca al paciente boca abajo y se usa en cirugías de columna o espalda." },
           { question: "¿Qué posición se usa en nefrectomías?", accepted: ["decúbito lateral", "lateral"], explanation: "El decúbito lateral se usa en nefrectomías y procedimientos de cadera." },
           { question: "¿Qué debe protegerse para evitar lesiones por presión?", accepted: ["puntos de apoyo", "zonas de apoyo"], explanation: "Los puntos de apoyo deben protegerse para evitar lesiones por presión, nerviosas y musculares." },
-          { question: "¿Qué debe hacerse antes de iniciar el procedimiento respecto a la mesa?", accepted: ["asegurar los frenos", "frenos", "verificar frenos"], explanation: "Se deben asegurar los frenos de la mesa de operaciones para evitar movimientos inseguros." }
+          { question: "¿Qué debe hacerse antes de iniciar el procedimiento respecto a la mesa?", accepted: ["asegurar los frenos", "frenos", "verificar frenos"], explanation: "Se deben asegurar los frenos de la mesa de operaciones para evitar movimientos inseguros." },
+          { question: "¿Qué posición se usa en cirugías pélvicas?", accepted: ["trendelenburg"], explanation: "La posición de Trendelenburg es útil en procedimientos pélvicos." },
+          { question: "¿Qué posición se usa en cirugías de cuello o cráneo?", accepted: ["trendelenburg invertida", "invertida"], explanation: "La Trendelenburg invertida coloca la cabeza más arriba que los pies." }
         ],
         quiz: [
           { question: "¿Qué posición se usa como base en muchas cirugías?", options: ["Decúbito prono", "Decúbito supino", "Litotomía", "Trendelenburg"], correctIndex: 1, explanation: "El decúbito supino es la posición base o estándar para muchas intervenciones quirúrgicas." },
@@ -806,7 +808,9 @@
           { question: "¿Qué posición se usa en nefrectomías?", options: ["Lateral", "Litotomía", "Supino", "Trendelenburg invertida"], correctIndex: 0, explanation: "El decúbito lateral es útil en nefrectomías y cirugías de cadera." },
           { question: "¿Qué posición deja la cabeza más arriba que los pies?", options: ["Trendelenburg", "Trendelenburg invertida", "Prono", "Litotomía"], correctIndex: 1, explanation: "La Trendelenburg invertida se utiliza en cirugías de cuello y cráneo." },
           { question: "¿Qué debe verificarse primero en la seguridad del paciente?", options: ["Color de la bata", "Identidad del paciente", "Marca del equipo", "Nombre del cirujano"], correctIndex: 1, explanation: "La identidad del paciente siempre debe verificarse antes de iniciar el procedimiento." },
-          { question: "¿Cuántas personas se recomiendan para movilizar a un paciente inconsciente?", options: ["1", "2", "3", "4"], correctIndex: 3, explanation: "Lo recomendado es mínimo 4 personas para una movilización segura." }
+          { question: "¿Cuántas personas se recomiendan para movilizar a un paciente inconsciente?", options: ["1", "2", "3", "4"], correctIndex: 3, explanation: "Lo recomendado es mínimo 4 personas para una movilización segura." },
+          { question: "¿Qué posición se usa en cirugías pélvicas?", options: ["Trendelenburg", "Supino", "Prono", "Lateral"], correctIndex: 0, explanation: "Trendelenburg se utiliza en procedimientos pélvicos." },
+          { question: "¿Qué estructura NO es parte de la mesa de operaciones?", options: ["Cabecera", "Tronco", "Piernas", "Hígado"], correctIndex: 3, explanation: "La mesa de operaciones tiene secciones como cabecera, tronco y piernas." }
         ],
         blocks: [
           { title: "Mesa de operaciones", content: "Es articulable y ajustable. Tiene secciones como cabecera, tronco y piernas. Permite adaptar la posición del paciente según el procedimiento quirúrgico." },
@@ -822,7 +826,9 @@
           { question: "Litotomía", answer: "piernas elevadas" },
           { question: "Puntos de apoyo", answer: "zonas a proteger" },
           { question: "Paciente inconsciente", answer: "mínimo 4 personas" },
-          { question: "Frenos", answer: "deben asegurarse" }
+          { question: "Frenos", answer: "deben asegurarse" },
+          { question: "Trendelenburg invertida", answer: "cabeza arriba" },
+          { question: "Mesa de operaciones", answer: "articulable" }
         ],
         combine: [
           { left: "Decúbito supino", right: "Paciente boca arriba" },
@@ -884,7 +890,9 @@
           { question: "¿Qué instrumental se usa para suturar tejidos?", accepted: ["instrumental de síntesis", "síntesis", "portaagujas"], explanation: "La síntesis incluye instrumentos y materiales que ayudan a cerrar y unir tejidos." },
           { question: "¿Qué significa anticipación quirúrgica?", accepted: ["prever instrumentos", "anticiparse", "prever"], explanation: "Anticiparse significa prever qué instrumento o insumo necesitará el cirujano antes de que lo pida." },
           { question: "¿Qué instrumento es típico de corte?", accepted: ["bisturí", "tijeras", "bisturi"], explanation: "El bisturí y las tijeras son ejemplos clásicos del instrumental de corte o diéresis." },
-          { question: "¿Qué es la antisepsia?", accepted: ["reducción de microorganismos", "disminuir microorganismos", "proceso antimicrobiano"], explanation: "La antisepsia reduce microorganismos en la piel o área operatoria para disminuir infecciones." }
+          { question: "¿Qué es la antisepsia?", accepted: ["reducción de microorganismos", "disminuir microorganismos", "proceso antimicrobiano"], explanation: "La antisepsia reduce microorganismos en la piel o área operatoria para disminuir infecciones." },
+          { question: "¿Qué fase corresponde al cierre de tejidos?", accepted: ["síntesis", "sintesis"], explanation: "La síntesis corresponde al cierre y unión de tejidos al final del procedimiento." },
+          { question: "¿Qué instrumental se usa para tomar tejidos?", accepted: ["aprehensión", "instrumental de aprehensión", "pinzas"], explanation: "El instrumental de aprehensión permite tomar tejidos, estructuras u objetos." }
         ],
         quiz: [
           { question: "¿Cuál es un ejemplo de instrumental de corte?", options: ["Pinza mosquito", "Bisturí", "Balfour", "Backhaus"], correctIndex: 1, explanation: "El bisturí pertenece al instrumental de diéresis o corte." },
@@ -894,7 +902,9 @@
           { question: "¿Qué tiempo quirúrgico corresponde al cierre de tejidos?", options: ["Diéresis", "Antisepsia", "Síntesis", "Drenaje"], correctIndex: 2, explanation: "La síntesis corresponde al cierre y unión de tejidos." },
           { question: "¿Qué representa la antisepsia?", options: ["Aumento de bacterias", "Reducción de microorganismos", "Separación de tejidos", "Sutura de piel"], correctIndex: 1, explanation: "La antisepsia reduce microorganismos en la zona operatoria." },
           { question: "¿Qué hace la instrumentista durante la cirugía?", options: ["Solo observa", "Anticipa instrumentos y mantiene esterilidad", "Administra anestesia", "Realiza diagnóstico"], correctIndex: 1, explanation: "La instrumentista debe anticiparse a las necesidades del cirujano y mantener la técnica estéril." },
-          { question: "¿Cuál es un ejemplo de instrumental de síntesis?", options: ["Portaagujas", "Mosquito", "Bisturí", "Farabeuf"], correctIndex: 0, explanation: "El portaagujas se utiliza en la síntesis o sutura de tejidos." }
+          { question: "¿Cuál es un ejemplo de instrumental de síntesis?", options: ["Portaagujas", "Mosquito", "Bisturí", "Farabeuf"], correctIndex: 0, explanation: "El portaagujas se utiliza en la síntesis o sutura de tejidos." },
+          { question: "¿Qué instrumental sirve para tomar tejidos?", options: ["Aprehensión", "Drenaje", "Campos", "Diéresis"], correctIndex: 0, explanation: "La aprehensión se usa para tomar tejidos u objetos." },
+          { question: "¿Cuál es el primer momento quirúrgico?", options: ["Síntesis", "Posición operatoria", "Hemostasia", "Drenaje"], correctIndex: 1, explanation: "La posición operatoria es el primer momento quirúrgico." }
         ],
         blocks: [
           { title: "Definición", content: "Instrumentar el acto quirúrgico consiste en proveer de insumos al cirujano durante un procedimiento a través de técnica estéril." },
@@ -910,7 +920,9 @@
           { question: "Aprehensión", answer: "tomar tejidos u objetos" },
           { question: "Antisepsia", answer: "reducir microorganismos" },
           { question: "Campo quirúrgico", answer: "área estéril" },
-          { question: "Bisturí", answer: "instrumental de corte" }
+          { question: "Bisturí", answer: "instrumental de corte" },
+          { question: "Portaagujas", answer: "síntesis" },
+          { question: "Mosquito", answer: "hemostasia" }
         ],
         combine: [
           { left: "Diéresis", right: "Corte o sección de tejidos" },
@@ -972,7 +984,9 @@
           { question: "¿Qué incluye la nota preoperatoria?", accepted: ["plan quirúrgico", "diagnóstico", "pronóstico", "tipo de intervención"], explanation: "La nota preoperatoria resume datos importantes como diagnóstico, plan quirúrgico y pronóstico." },
           { question: "¿Qué significa PRN?", accepted: ["si es necesario", "cuando sea necesario"], explanation: "PRN significa que la orden se ejecuta solo si el paciente lo requiere según parámetros indicados." },
           { question: "¿Qué debe llevar toda anotación?", accepted: ["fecha y hora", "firma", "nombre"], explanation: "Toda anotación clínica debe llevar fecha, hora y firma para asegurar trazabilidad." },
-          { question: "¿Por qué es importante la confidencialidad?", accepted: ["proteger al paciente", "privacidad", "seguridad legal"], explanation: "La confidencialidad protege la privacidad del paciente y el correcto manejo de la información clínica." }
+          { question: "¿Por qué es importante la confidencialidad?", accepted: ["proteger al paciente", "privacidad", "seguridad legal"], explanation: "La confidencialidad protege la privacidad del paciente y el correcto manejo de la información clínica." },
+          { question: "¿Qué documento programa la cirugía?", accepted: ["solicitud de quirófano", "solicitud de quirofano"], explanation: "La solicitud de quirófano se utiliza para programar y organizar el procedimiento quirúrgico." },
+          { question: "¿Qué tipo de orden se cumple de forma regular?", accepted: ["rutinaria", "órdenes rutinarias", "ordenes rutinarias"], explanation: "Las órdenes rutinarias se cumplen de forma programada o habitual." }
         ],
         quiz: [
           { question: "¿Cuál es una característica correcta de las anotaciones en el expediente clínico?", options: ["Pueden tener tachaduras si se entienden", "Deben redactarse con claridad y objetividad", "Pueden omitirse horas", "Pueden tener abreviaturas no autorizadas"], correctIndex: 1, explanation: "Las anotaciones deben ser claras, objetivas y exactas." },
@@ -982,7 +996,9 @@
           { question: "¿Qué documento informa al paciente sobre riesgos y beneficios?", options: ["Hoja de alta", "Consentimiento informado", "Receta médica", "Bitácora"], correctIndex: 1, explanation: "El consentimiento informado explica el procedimiento y requiere autorización escrita." },
           { question: "¿Qué debe incluir toda anotación clínica?", options: ["Color favorito del paciente", "Fecha y hora", "Solo firma", "Solo observación"], correctIndex: 1, explanation: "Toda anotación debe incluir fecha y hora para mantener orden cronológico." },
           { question: "¿Qué debe evitarse en el expediente?", options: ["Objetividad", "Letra legible", "Abreviaturas no autorizadas", "Datos completos"], correctIndex: 2, explanation: "Las abreviaturas no autorizadas pueden generar errores y deben evitarse." },
-          { question: "¿Cuál es función de la nota de enfermería?", options: ["Hacer diagnósticos médicos", "Registrar cuidados y evolución", "Sustituir al médico", "Dar alta al paciente"], correctIndex: 1, explanation: "La nota de enfermería registra observaciones, cuidados y evolución del paciente." }
+          { question: "¿Cuál es función de la nota de enfermería?", options: ["Hacer diagnósticos médicos", "Registrar cuidados y evolución", "Sustituir al médico", "Dar alta al paciente"], correctIndex: 1, explanation: "La nota de enfermería registra observaciones, cuidados y evolución del paciente." },
+          { question: "¿Qué tipo de orden se cumple inmediatamente?", options: ["PRN", "STAT", "Rutinaria", "Condicional"], correctIndex: 1, explanation: "Las órdenes STAT deben cumplirse de inmediato." },
+          { question: "¿Qué documento se usa para programar cirugía?", options: ["Solicitud de quirófano", "Consentimiento", "Nota de enfermería", "Interconsulta"], correctIndex: 0, explanation: "La solicitud de quirófano permite programar el procedimiento." }
         ],
         blocks: [
           { title: "Definición y carácter", content: "El expediente clínico reúne documentos para diagnóstico, tratamiento y cuidados. Tiene carácter legal, ético y confidencial." },
@@ -998,7 +1014,9 @@
           { question: "Nota preoperatoria", answer: "plan quirúrgico y diagnóstico" },
           { question: "Anotaciones", answer: "claras y objetivas" },
           { question: "Confidencialidad", answer: "protege al paciente" },
-          { question: "Nota de enfermería", answer: "registra cuidados" }
+          { question: "Nota de enfermería", answer: "registra cuidados" },
+          { question: "Solicitud de quirófano", answer: "programa cirugía" },
+          { question: "Firma", answer: "identifica al profesional" }
         ],
         combine: [
           { left: "STAT", right: "Se cumple inmediatamente" },
