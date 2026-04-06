@@ -261,6 +261,60 @@
       gap: 10px;
     }
 
+    .terms-panel {
+      margin-top: 18px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .terms-panel h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .terms-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .term-section {
+      margin-top: 18px;
+    }
+
+    .term-section h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .term-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .term-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .term-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .term-card span {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
     button {
       font: inherit;
     }
@@ -680,6 +734,8 @@
         <div class="helper-note" style="margin-top:16px;">
           <strong>Tip:</strong> en <strong>Mixto</strong> se combinan los 3 temas para practicar más parecido a un repaso general.
         </div>
+
+        <div id="termsPanel" class="terms-panel"></div>
       </aside>
     </section>
 
@@ -694,70 +750,87 @@
         name: "Posiciones Quirúrgicas",
         shortName: "Posiciones",
         description: "Repaso sobre mesa de operaciones, seguridad del paciente y posiciones operatorias básicas.",
+        summary: {
+          title: "Resumen del tema",
+          text: "Las posiciones quirúrgicas son fundamentales para facilitar el procedimiento, proteger la seguridad del paciente y prevenir lesiones. La enfermería debe conocer la anatomía, fisiología, principios de movilización y funcionamiento de la mesa de operaciones para mantener una correcta alineación corporal.",
+          points: [
+            "La mesa de operaciones es articulable y ajustable según la cirugía.",
+            "La enfermería actúa como guardián de la seguridad del paciente.",
+            "Se deben proteger los puntos de apoyo para evitar lesiones nerviosas, musculares y por presión.",
+            "Las posiciones más comunes son supino, prono, lateral, Trendelenburg, Trendelenburg invertida y litotomía.",
+            "Mover a un paciente inconsciente requiere coordinación del equipo y mínimo 4 personas."
+          ]
+        },
         flashcards: [
-          { front: "¿Qué son las posiciones quirúrgicas?", back: "Son las posturas en las que se coloca al paciente durante una cirugía para facilitar el procedimiento y proteger su seguridad." },
-          { front: "Decúbito supino", back: "Paciente acostado boca arriba. Es la posición base para muchas cirugías." },
-          { front: "Decúbito prono", back: "Paciente acostado boca abajo. Se usa en cirugías de espalda o columna." },
-          { front: "Decúbito lateral", back: "Paciente acostado de lado. Se usa en nefrectomías o prótesis de cadera." },
-          { front: "Trendelenburg", back: "Paciente con la cabeza más abajo que los pies. Útil en cirugías pélvicas." },
-          { front: "Trendelenburg invertida", back: "Paciente con la cabeza más arriba que los pies. Útil en cuello o cráneo." },
-          { front: "Litotomía", back: "Paciente boca arriba con piernas elevadas y separadas. Usada en ginecología y urología." },
-          { front: "Responsabilidad de enfermería", back: "Proteger la seguridad del paciente, prevenir lesiones y vigilar la alineación corporal." }
+          { front: "Posiciones quirúrgicas", back: "Son las posturas en las que se coloca al paciente durante una cirugía para facilitar el procedimiento y proteger su seguridad." },
+          { front: "Mesa de operaciones", back: "Equipo articulable donde se coloca al paciente durante la cirugía." },
+          { front: "Función de la mesa de operaciones", back: "Permitir colocar al paciente en la posición adecuada según el procedimiento quirúrgico." },
+          { front: "Partes de la mesa de operaciones", back: "Cabecera, tronco y piernas." },
+          { front: "Sistemas de la mesa de operaciones", back: "Puede ser eléctrica, hidráulica o manual." },
+          { front: "Rol de enfermería", back: "Garantizar la seguridad del paciente y prevenir lesiones durante la cirugía." },
+          { front: "Riesgos de mala posición", back: "Lesiones nerviosas, musculares, vasculares y por presión." },
+          { front: "Verificación inicial", back: "Confirmar identidad del paciente antes del procedimiento." },
+          { front: "Frenos de la mesa", back: "Deben estar asegurados antes de iniciar la cirugía." },
+          { front: "Movilización del paciente", back: "Debe hacerse con coordinación del equipo y el anestesiólogo." },
+          { front: "Pacientes inconscientes", back: "Se mueven con mínimo 4 personas." },
+          { front: "Puntos de apoyo", back: "Zonas del cuerpo que deben protegerse para evitar lesiones." },
+          { front: "Zonas a proteger", back: "Cabeza, hombros, codos, espalda, cadera, rodillas y tobillos." },
+          { front: "Decúbito supino", back: "Paciente boca arriba." },
+          { front: "Uso del supino", back: "Posición base en muchas cirugías." },
+          { front: "Decúbito prono", back: "Paciente boca abajo." },
+          { front: "Uso del prono", back: "Cirugías de espalda o columna." },
+          { front: "Decúbito lateral", back: "Paciente acostado de lado." },
+          { front: "Uso del lateral", back: "Nefrectomía y prótesis de cadera." },
+          { front: "Trendelenburg", back: "Cabeza más abajo que los pies." },
+          { front: "Uso de Trendelenburg", back: "Cirugías pélvicas." },
+          { front: "Trendelenburg invertida", back: "Cabeza más arriba que los pies." },
+          { front: "Uso de Trendelenburg invertida", back: "Cirugías de cuello y cráneo." },
+          { front: "Litotomía", back: "Paciente boca arriba con piernas elevadas y separadas." },
+          { front: "Uso de litotomía", back: "Procedimientos ginecológicos y urológicos." }
         ],
         learn: [
-          {
-            question: "¿Qué posición coloca al paciente boca arriba?",
-            accepted: ["decúbito supino", "supino"],
-            explanation: "La posición supina o decúbito supino coloca al paciente boca arriba y es la posición base para múltiples procedimientos."
-          },
-          {
-            question: "¿Qué posición deja la cabeza más abajo que los pies?",
-            accepted: ["trendelenburg"],
-            explanation: "Trendelenburg se usa cuando la cabeza queda más abajo que los pies, sobre todo en cirugías pélvicas."
-          },
-          {
-            question: "¿Cuántas personas se recomiendan para mover a un paciente inconsciente?",
-            accepted: ["4", "cuatro", "mínimo 4", "minimo 4", "4 personas", "cuatro personas"],
-            explanation: "Se recomienda movilizar a un paciente inconsciente con mínimo 4 personas para evitar lesiones y mantener la seguridad."
-          }
+          { question: "¿Qué posición coloca al paciente boca arriba?", accepted: ["decúbito supino", "supino"], explanation: "La posición supina o decúbito supino coloca al paciente boca arriba y es la posición base para múltiples procedimientos." },
+          { question: "¿Qué posición deja la cabeza más abajo que los pies?", accepted: ["trendelenburg"], explanation: "Trendelenburg se usa cuando la cabeza queda más abajo que los pies, sobre todo en cirugías pélvicas." },
+          { question: "¿Cuántas personas se recomiendan para mover a un paciente inconsciente?", accepted: ["4", "cuatro", "mínimo 4", "minimo 4", "4 personas", "cuatro personas"], explanation: "Se recomienda movilizar a un paciente inconsciente con mínimo 4 personas para evitar lesiones y mantener la seguridad." },
+          { question: "¿Qué posición se usa para procedimientos ginecológicos?", accepted: ["litotomía", "litotomia"], explanation: "La litotomía es la posición usada en procedimientos ginecológicos y urológicos." },
+          { question: "¿Qué posición se usa en cirugías de espalda?", accepted: ["decúbito prono", "prono"], explanation: "El prono coloca al paciente boca abajo y se usa en cirugías de columna o espalda." },
+          { question: "¿Qué posición se usa en nefrectomías?", accepted: ["decúbito lateral", "lateral"], explanation: "El decúbito lateral se usa en nefrectomías y procedimientos de cadera." },
+          { question: "¿Qué debe protegerse para evitar lesiones por presión?", accepted: ["puntos de apoyo", "zonas de apoyo"], explanation: "Los puntos de apoyo deben protegerse para evitar lesiones por presión, nerviosas y musculares." },
+          { question: "¿Qué debe hacerse antes de iniciar el procedimiento respecto a la mesa?", accepted: ["asegurar los frenos", "frenos", "verificar frenos"], explanation: "Se deben asegurar los frenos de la mesa de operaciones para evitar movimientos inseguros." }
         ],
         quiz: [
-          {
-            question: "¿Qué posición se usa como base en muchas cirugías?",
-            options: ["Decúbito prono", "Decúbito supino", "Litotomía", "Trendelenburg"],
-            correctIndex: 1,
-            explanation: "El decúbito supino es la posición base o estándar para muchas intervenciones quirúrgicas."
-          },
-          {
-            question: "¿Qué posición se asocia a procedimientos ginecológicos y urológicos?",
-            options: ["Litotomía", "Trendelenburg invertida", "Decúbito lateral", "Decúbito prono"],
-            correctIndex: 0,
-            explanation: "La litotomía coloca al paciente boca arriba con piernas elevadas y separadas."
-          },
-          {
-            question: "¿Qué debe proteger enfermería para evitar lesiones por presión?",
-            options: ["Solo los pies", "Únicamente la espalda", "Los puntos de apoyo", "Solo la cabeza"],
-            correctIndex: 2,
-            explanation: "Enfermería debe proteger los puntos de apoyo para evitar lesiones nerviosas, musculares o por presión."
-          }
+          { question: "¿Qué posición se usa como base en muchas cirugías?", options: ["Decúbito prono", "Decúbito supino", "Litotomía", "Trendelenburg"], correctIndex: 1, explanation: "El decúbito supino es la posición base o estándar para muchas intervenciones quirúrgicas." },
+          { question: "¿Qué posición se asocia a procedimientos ginecológicos y urológicos?", options: ["Litotomía", "Trendelenburg invertida", "Decúbito lateral", "Decúbito prono"], correctIndex: 0, explanation: "La litotomía coloca al paciente boca arriba con piernas elevadas y separadas." },
+          { question: "¿Qué debe proteger enfermería para evitar lesiones por presión?", options: ["Solo los pies", "Únicamente la espalda", "Los puntos de apoyo", "Solo la cabeza"], correctIndex: 2, explanation: "Enfermería debe proteger los puntos de apoyo para evitar lesiones nerviosas, musculares o por presión." },
+          { question: "¿Qué posición coloca al paciente boca abajo?", options: ["Supino", "Prono", "Lateral", "Trendelenburg"], correctIndex: 1, explanation: "El decúbito prono coloca al paciente boca abajo." },
+          { question: "¿Qué posición se usa en nefrectomías?", options: ["Lateral", "Litotomía", "Supino", "Trendelenburg invertida"], correctIndex: 0, explanation: "El decúbito lateral es útil en nefrectomías y cirugías de cadera." },
+          { question: "¿Qué posición deja la cabeza más arriba que los pies?", options: ["Trendelenburg", "Trendelenburg invertida", "Prono", "Litotomía"], correctIndex: 1, explanation: "La Trendelenburg invertida se utiliza en cirugías de cuello y cráneo." },
+          { question: "¿Qué debe verificarse primero en la seguridad del paciente?", options: ["Color de la bata", "Identidad del paciente", "Marca del equipo", "Nombre del cirujano"], correctIndex: 1, explanation: "La identidad del paciente siempre debe verificarse antes de iniciar el procedimiento." },
+          { question: "¿Cuántas personas se recomiendan para movilizar a un paciente inconsciente?", options: ["1", "2", "3", "4"], correctIndex: 3, explanation: "Lo recomendado es mínimo 4 personas para una movilización segura." }
         ],
         blocks: [
           { title: "Mesa de operaciones", content: "Es articulable y ajustable. Tiene secciones como cabecera, tronco y piernas. Permite adaptar la posición del paciente según el procedimiento quirúrgico." },
           { title: "Seguridad del paciente", content: "Se debe verificar identidad, asegurar frenos, coordinar movimientos con el anestesiólogo y proteger los puntos de apoyo." },
-          { title: "Posiciones básicas", content: "Supino = boca arriba. Prono = boca abajo. Lateral = de lado. Trendelenburg = cabeza abajo. Trendelenburg invertida = cabeza arriba. Litotomía = piernas elevadas." }
+          { title: "Posiciones básicas", content: "Supino = boca arriba. Prono = boca abajo. Lateral = de lado. Trendelenburg = cabeza abajo. Trendelenburg invertida = cabeza arriba. Litotomía = piernas elevadas." },
+          { title: "Cuidados de enfermería", content: "Enfermería debe vigilar la alineación corporal, evitar presión excesiva y proteger las zonas vulnerables del paciente." }
         ],
         blast: [
           { question: "Supino", answer: "boca arriba" },
           { question: "Prono", answer: "boca abajo" },
           { question: "Lateral", answer: "de lado" },
           { question: "Trendelenburg", answer: "cabeza abajo" },
-          { question: "Litotomía", answer: "piernas elevadas" }
+          { question: "Litotomía", answer: "piernas elevadas" },
+          { question: "Puntos de apoyo", answer: "zonas a proteger" },
+          { question: "Paciente inconsciente", answer: "mínimo 4 personas" },
+          { question: "Frenos", answer: "deben asegurarse" }
         ],
         combine: [
           { left: "Decúbito supino", right: "Paciente boca arriba" },
           { left: "Decúbito prono", right: "Paciente boca abajo" },
           { left: "Trendelenburg", right: "Cabeza más abajo que los pies" },
-          { left: "Litotomía", right: "Piernas elevadas y separadas" }
+          { left: "Litotomía", right: "Piernas elevadas y separadas" },
+          { left: "Decúbito lateral", right: "Paciente de lado" },
+          { left: "Puntos de apoyo", right: "Zonas que deben protegerse" }
         ]
       },
 
@@ -765,70 +838,87 @@
         name: "Instrumentación Quirúrgica",
         shortName: "Instrumentación",
         description: "Repaso sobre instrumental quirúrgico, clasificación, tiempos quirúrgicos y técnica de instrumentar.",
+        summary: {
+          title: "Resumen del tema",
+          text: "La instrumentación quirúrgica consiste en asistir al cirujano de forma estéril, anticipando las necesidades del acto quirúrgico. Requiere conocimiento del instrumental, los tiempos quirúrgicos y la función específica de cada instrumento dentro del procedimiento.",
+          points: [
+            "La instrumentista debe conocer la técnica quirúrgica y anticiparse a las necesidades del cirujano.",
+            "El instrumental se clasifica por función: corte, separación, aprehensión, hemostasia, síntesis y drenaje.",
+            "Los cinco momentos quirúrgicos orientan el desarrollo del acto operatorio.",
+            "La hemostasia se enfoca en controlar el sangrado.",
+            "La diéresis se relaciona con la incisión o corte de tejidos."
+          ]
+        },
         flashcards: [
-          { front: "¿Qué es la técnica de instrumentar el acto quirúrgico?", back: "Consiste en proveer de insumos quirúrgicos al cirujano durante un procedimiento mediante técnica estéril." },
-          { front: "Objetivo principal de la instrumentista", back: "Asistir al equipo quirúrgico aséptico anticipándose a sus necesidades con conocimientos precisos de la técnica quirúrgica." },
-          { front: "Instrumental de diéresis o corte", back: "Se usa para seccionar, cortar o extirpar tejidos y materiales. Ejemplos: bisturí y tijeras." },
+          { front: "Técnica de instrumentar", back: "Consiste en proveer de insumos quirúrgicos al cirujano mediante técnica estéril." },
+          { front: "Objetivo principal de la instrumentista", back: "Asistir al equipo quirúrgico aséptico anticipándose a sus necesidades." },
+          { front: "Instrumental de diéresis o corte", back: "Se usa para seccionar, cortar o extirpar tejidos y materiales." },
+          { front: "Ejemplos de corte", back: "Bisturí y tijeras." },
           { front: "Instrumental de separación", back: "Sirve para retraer tejidos u órganos y mejorar la visión del campo operatorio." },
+          { front: "Ejemplo de separación", back: "Separadores como Farabeuf o Balfour." },
           { front: "Instrumental de aprehensión", back: "Se usa para tomar tejidos, estructuras u objetos." },
-          { front: "Instrumental de hemostasia", back: "Se usa para detener sangrado. Ejemplos: pinzas mosquito, Kelly, Rochester y electrobisturí." },
-          { front: "Instrumental de síntesis", back: "Sirve para suturar tejidos y restablecer su continuidad." },
-          { front: "Cinco momentos quirúrgicos", back: "Posición operatoria, antisepsia y campos, diéresis, operación propiamente dicha y síntesis." }
+          { front: "Ejemplo de aprehensión", back: "Pinzas de disección o Allis." },
+          { front: "Instrumental de hemostasia", back: "Se usa para detener el sangrado." },
+          { front: "Ejemplos de hemostasia", back: "Mosquito, Kelly, Rochester, electrobisturí." },
+          { front: "Instrumental de síntesis", back: "Sirve para suturar tejidos y restablecer continuidad." },
+          { front: "Ejemplo de síntesis", back: "Portaagujas y material de sutura." },
+          { front: "Instrumental de drenaje", back: "Permite evacuar líquidos o secreciones." },
+          { front: "Cinco momentos quirúrgicos", back: "Posición operatoria, antisepsia y campos, diéresis, operación propiamente dicha y síntesis." },
+          { front: "Posición operatoria", back: "Primer momento quirúrgico para colocar al paciente según la cirugía." },
+          { front: "Antisepsia", back: "Proceso para reducir microorganismos en la piel o zona operatoria." },
+          { front: "Campos quirúrgicos", back: "Material estéril que delimita el área de trabajo." },
+          { front: "Diéresis", back: "Incisión o corte metódico de los tejidos." },
+          { front: "Operación propiamente dicha", back: "Fase central del procedimiento quirúrgico." },
+          { front: "Síntesis", back: "Cierre y unión de tejidos al finalizar la cirugía." },
+          { front: "Hemostasia", back: "Control del sangrado durante la cirugía." },
+          { front: "Asepsia", back: "Conjunto de medidas para evitar contaminación microbiana." },
+          { front: "Campo operatorio", back: "Área del cuerpo preparada para la cirugía." },
+          { front: "Anticipación quirúrgica", back: "Capacidad de prever qué instrumento se necesitará a continuación." },
+          { front: "Rol de la instrumentista", back: "Mantener orden, esterilidad y apoyo eficiente durante el acto quirúrgico." }
         ],
         learn: [
-          {
-            question: "¿Qué instrumental se usa para realizar hemostasia?",
-            accepted: ["instrumental de hemostasia", "hemostasia", "pinzas hemostáticas"],
-            explanation: "El instrumental de hemostasia se utiliza para controlar el sangrado. Entre los ejemplos están pinzas mosquito, Kelly y Rochester."
-          },
-          {
-            question: "¿Cómo se llama el tiempo quirúrgico en el que se cortan los tejidos?",
-            accepted: ["diéresis", "dieresis"],
-            explanation: "La diéresis es el tiempo quirúrgico relacionado con la incisión o sección metódica de los tejidos."
-          },
-          {
-            question: "Menciona uno de los cinco momentos quirúrgicos.",
-            accepted: ["posición operatoria", "antisepsia", "diéresis", "dieresis", "operación propiamente dicha", "síntesis", "sintesis"],
-            explanation: "Los cinco momentos quirúrgicos incluyen posición operatoria, antisepsia y campos, diéresis, operación propiamente dicha y síntesis."
-          }
+          { question: "¿Qué instrumental se usa para realizar hemostasia?", accepted: ["instrumental de hemostasia", "hemostasia", "pinzas hemostáticas"], explanation: "El instrumental de hemostasia se utiliza para controlar el sangrado. Entre los ejemplos están pinzas mosquito, Kelly y Rochester." },
+          { question: "¿Cómo se llama el tiempo quirúrgico en el que se cortan los tejidos?", accepted: ["diéresis", "dieresis"], explanation: "La diéresis es el tiempo quirúrgico relacionado con la incisión o sección metódica de los tejidos." },
+          { question: "Menciona uno de los cinco momentos quirúrgicos.", accepted: ["posición operatoria", "antisepsia", "diéresis", "dieresis", "operación propiamente dicha", "síntesis", "sintesis"], explanation: "Los cinco momentos quirúrgicos incluyen posición operatoria, antisepsia y campos, diéresis, operación propiamente dicha y síntesis." },
+          { question: "¿Qué instrumental sirve para retraer tejidos?", accepted: ["instrumental de separación", "separación", "separadores"], explanation: "El instrumental de separación se usa para retraer tejidos y mejorar la visión del campo quirúrgico." },
+          { question: "¿Qué instrumental se usa para suturar tejidos?", accepted: ["instrumental de síntesis", "síntesis", "portaagujas"], explanation: "La síntesis incluye instrumentos y materiales que ayudan a cerrar y unir tejidos." },
+          { question: "¿Qué significa anticipación quirúrgica?", accepted: ["prever instrumentos", "anticiparse", "prever"], explanation: "Anticiparse significa prever qué instrumento o insumo necesitará el cirujano antes de que lo pida." },
+          { question: "¿Qué instrumento es típico de corte?", accepted: ["bisturí", "tijeras", "bisturi"], explanation: "El bisturí y las tijeras son ejemplos clásicos del instrumental de corte o diéresis." },
+          { question: "¿Qué es la antisepsia?", accepted: ["reducción de microorganismos", "disminuir microorganismos", "proceso antimicrobiano"], explanation: "La antisepsia reduce microorganismos en la piel o área operatoria para disminuir infecciones." }
         ],
         quiz: [
-          {
-            question: "¿Cuál es un ejemplo de instrumental de corte?",
-            options: ["Pinza mosquito", "Bisturí", "Balfour", "Backhaus"],
-            correctIndex: 1,
-            explanation: "El bisturí pertenece al instrumental de diéresis o corte."
-          },
-          {
-            question: "¿Cuál de estos forma parte de los cinco momentos quirúrgicos?",
-            options: ["Valoración nutricional", "Síntesis", "Historia laboral", "Farmacología"],
-            correctIndex: 1,
-            explanation: "La síntesis es uno de los cinco momentos quirúrgicos fundamentales."
-          },
-          {
-            question: "¿Qué instrumental se usa para retraer tejidos y mejorar la visión del campo operatorio?",
-            options: ["Síntesis", "Separación", "Aprehensión", "Drenaje"],
-            correctIndex: 1,
-            explanation: "El instrumental de separación sirve para retraer tejidos u órganos."
-          }
+          { question: "¿Cuál es un ejemplo de instrumental de corte?", options: ["Pinza mosquito", "Bisturí", "Balfour", "Backhaus"], correctIndex: 1, explanation: "El bisturí pertenece al instrumental de diéresis o corte." },
+          { question: "¿Cuál de estos forma parte de los cinco momentos quirúrgicos?", options: ["Valoración nutricional", "Síntesis", "Historia laboral", "Farmacología"], correctIndex: 1, explanation: "La síntesis es uno de los cinco momentos quirúrgicos fundamentales." },
+          { question: "¿Qué instrumental se usa para retraer tejidos y mejorar la visión del campo operatorio?", options: ["Síntesis", "Separación", "Aprehensión", "Drenaje"], correctIndex: 1, explanation: "El instrumental de separación sirve para retraer tejidos u órganos." },
+          { question: "¿Cuál es la función del instrumental de hemostasia?", options: ["Cortar tejidos", "Controlar sangrado", "Separar órganos", "Cerrar heridas"], correctIndex: 1, explanation: "La hemostasia se enfoca en detener el sangrado." },
+          { question: "¿Qué tiempo quirúrgico corresponde al cierre de tejidos?", options: ["Diéresis", "Antisepsia", "Síntesis", "Drenaje"], correctIndex: 2, explanation: "La síntesis corresponde al cierre y unión de tejidos." },
+          { question: "¿Qué representa la antisepsia?", options: ["Aumento de bacterias", "Reducción de microorganismos", "Separación de tejidos", "Sutura de piel"], correctIndex: 1, explanation: "La antisepsia reduce microorganismos en la zona operatoria." },
+          { question: "¿Qué hace la instrumentista durante la cirugía?", options: ["Solo observa", "Anticipa instrumentos y mantiene esterilidad", "Administra anestesia", "Realiza diagnóstico"], correctIndex: 1, explanation: "La instrumentista debe anticiparse a las necesidades del cirujano y mantener la técnica estéril." },
+          { question: "¿Cuál es un ejemplo de instrumental de síntesis?", options: ["Portaagujas", "Mosquito", "Bisturí", "Farabeuf"], correctIndex: 0, explanation: "El portaagujas se utiliza en la síntesis o sutura de tejidos." }
         ],
         blocks: [
           { title: "Definición", content: "Instrumentar el acto quirúrgico consiste en proveer de insumos al cirujano durante un procedimiento a través de técnica estéril." },
           { title: "Clasificación funcional", content: "El instrumental puede clasificarse según función en corte, separación, aprehensión, hemostasia, síntesis y drenaje." },
-          { title: "Tiempos quirúrgicos", content: "Los momentos importantes incluyen posición operatoria, antisepsia y colocación de campos, diéresis, operación propiamente dicha y síntesis." }
+          { title: "Tiempos quirúrgicos", content: "Los momentos importantes incluyen posición operatoria, antisepsia y colocación de campos, diéresis, operación propiamente dicha y síntesis." },
+          { title: "Rol de la instrumentista", content: "La instrumentista debe conocer la cirugía, mantener el orden, preservar la esterilidad y anticiparse a las necesidades del equipo quirúrgico." }
         ],
         blast: [
           { question: "Diéresis", answer: "corte o incisión" },
           { question: "Hemostasia", answer: "detener sangrado" },
           { question: "Síntesis", answer: "suturar o unir tejidos" },
           { question: "Separación", answer: "retraer tejidos" },
-          { question: "Aprehensión", answer: "tomar tejidos u objetos" }
+          { question: "Aprehensión", answer: "tomar tejidos u objetos" },
+          { question: "Antisepsia", answer: "reducir microorganismos" },
+          { question: "Campo quirúrgico", answer: "área estéril" },
+          { question: "Bisturí", answer: "instrumental de corte" }
         ],
         combine: [
           { left: "Diéresis", right: "Corte o sección de tejidos" },
           { left: "Hemostasia", right: "Control del sangrado" },
           { left: "Síntesis", right: "Sutura y cierre" },
-          { left: "Separación", right: "Retracción de tejidos" }
+          { left: "Separación", right: "Retracción de tejidos" },
+          { left: "Aprehensión", right: "Tomar tejidos u objetos" },
+          { left: "Antisepsia", right: "Reducción de microorganismos" }
         ]
       },
 
@@ -836,70 +926,87 @@
         name: "Expediente Clínico",
         shortName: "Expediente",
         description: "Repaso sobre documentación clínica pre, trans y post operatoria, notas y registros.",
+        summary: {
+          title: "Resumen del tema",
+          text: "El expediente clínico es un documento legal, confidencial y esencial para el registro del estado del paciente, los tratamientos y los cuidados de enfermería. Una documentación adecuada permite continuidad asistencial, respaldo legal y seguridad en la atención.",
+          points: [
+            "El expediente clínico reúne información escrita, gráfica e imagenológica del paciente.",
+            "Tiene valor legal y debe manejarse con confidencialidad.",
+            "Las anotaciones deben ser exactas, claras, objetivas y legibles.",
+            "Incluye órdenes médicas, notas de enfermería, consentimiento informado y documentación preoperatoria.",
+            "El consentimiento informado protege al paciente y al equipo de salud desde el punto de vista ético y legal."
+          ]
+        },
         flashcards: [
-          { front: "¿Qué es el expediente clínico?", back: "Es el conjunto de documentos escritos, gráficos e imagenológicos donde se integran datos para diagnóstico, tratamiento y cuidados de enfermería." },
-          { front: "Carácter del expediente clínico", back: "Tiene carácter legal, confidencial y es propiedad de la institución." },
-          { front: "¿Cómo deben ser las anotaciones?", back: "Deben ser exactas, objetivas, claras, en español, con letra legible y sin abreviaturas no autorizadas." },
-          { front: "Hoja de órdenes médicas", back: "Documento donde el médico prescribe tratamientos o servicios para el paciente." },
+          { front: "Expediente clínico", back: "Conjunto de documentos escritos, gráficos e imagenológicos usados para diagnóstico, tratamiento y cuidados." },
+          { front: "Carácter del expediente", back: "Legal, confidencial y propiedad de la institución." },
+          { front: "Importancia del expediente", back: "Permite continuidad asistencial, respaldo legal y registro del cuidado." },
+          { front: "Anotaciones correctas", back: "Deben ser exactas, objetivas, claras, en español y con letra legible." },
+          { front: "Lo que debe evitarse", back: "Tachaduras, abreviaturas no autorizadas y omisión de datos." },
+          { front: "Hoja de órdenes médicas", back: "Documento donde el médico prescribe tratamientos o servicios." },
           { front: "Órdenes STAT", back: "Deben cumplirse inmediatamente y por una sola vez." },
-          { front: "Órdenes PRN", back: "Se ejecutan si es necesario según parámetros indicados por el médico." },
-          { front: "Consentimiento informado", back: "Documento que informa al paciente o tutor sobre el procedimiento y sus riesgos, y debe firmarse por escrito." },
-          { front: "Nota preoperatoria", back: "Incluye plan quirúrgico, fecha, diagnóstico, tipo de intervención, cuidados preoperatorios y pronóstico." }
+          { front: "Órdenes PRN", back: "Se ejecutan si es necesario según parámetros médicos." },
+          { front: "Órdenes rutinarias", back: "Indicaciones que se cumplen de forma regular o programada." },
+          { front: "Consentimiento informado", back: "Documento que explica procedimiento, riesgos y autorización escrita." },
+          { front: "Valor legal del consentimiento", back: "Protege al paciente y al equipo de salud en decisiones clínicas." },
+          { front: "Nota preoperatoria", back: "Resume diagnóstico, plan quirúrgico, intervención y pronóstico." },
+          { front: "Evaluación preoperatoria", back: "Valoración del paciente antes de la cirugía." },
+          { front: "Solicitud de quirófano", back: "Documento usado para programar el procedimiento quirúrgico." },
+          { front: "Interconsulta", back: "Consulta solicitada a otro profesional o especialidad." },
+          { front: "Nota de enfermería", back: "Registro de observaciones, cuidados y evolución del paciente." },
+          { front: "Signos vitales", back: "Datos clínicos básicos que deben registrarse con precisión." },
+          { front: "Hora y fecha", back: "Toda anotación debe llevar registro cronológico correcto." },
+          { front: "Firma del profesional", back: "Toda nota debe estar identificada por quien la realiza." },
+          { front: "Lenguaje clínico", back: "Debe ser claro, profesional y objetivo." },
+          { front: "Confidencialidad", back: "La información del expediente no debe divulgarse sin autorización." },
+          { front: "Soporte documental", back: "Sirve como evidencia del manejo del paciente." },
+          { front: "Responsabilidad de enfermería", back: "Registrar de forma correcta, clara y oportuna los cuidados brindados." },
+          { front: "Datos preoperatorios", back: "Incluyen exámenes, consentimiento y valoración del paciente." },
+          { front: "Objetivo del expediente", back: "Documentar integralmente la atención y evolución del paciente." }
         ],
         learn: [
-          {
-            question: "¿Qué carácter tiene el expediente clínico?",
-            accepted: ["legal y confidencial", "legal, confidencial", "legal confidencial", "legal", "confidencial y legal"],
-            explanation: "El expediente clínico es un documento de carácter legal, confidencial y propiedad de la institución."
-          },
-          {
-            question: "¿Cómo se llaman las órdenes que deben cumplirse inmediatamente una sola vez?",
-            accepted: ["stat", "órdenes stat", "ordenes stat"],
-            explanation: "Las órdenes STAT se ejecutan de forma inmediata y por una sola vez."
-          },
-          {
-            question: "¿Qué documento informa al paciente sobre riesgos y requiere autorización escrita?",
-            accepted: ["consentimiento informado", "hoja de autorización", "autorización o consentimiento informado"],
-            explanation: "El consentimiento informado da soporte legal y ético e informa sobre el procedimiento y sus posibles complicaciones."
-          }
+          { question: "¿Qué carácter tiene el expediente clínico?", accepted: ["legal y confidencial", "legal, confidencial", "legal confidencial", "legal", "confidencial y legal"], explanation: "El expediente clínico es un documento de carácter legal, confidencial y propiedad de la institución." },
+          { question: "¿Cómo se llaman las órdenes que deben cumplirse inmediatamente una sola vez?", accepted: ["stat", "órdenes stat", "ordenes stat"], explanation: "Las órdenes STAT se ejecutan de forma inmediata y por una sola vez." },
+          { question: "¿Qué documento informa al paciente sobre riesgos y requiere autorización escrita?", accepted: ["consentimiento informado", "hoja de autorización", "autorización o consentimiento informado"], explanation: "El consentimiento informado da soporte legal y ético e informa sobre el procedimiento y sus posibles complicaciones." },
+          { question: "¿Cómo deben ser las anotaciones de enfermería?", accepted: ["claras", "objetivas", "exactas", "legibles"], explanation: "Las anotaciones deben ser claras, objetivas, exactas y legibles para garantizar una buena continuidad asistencial." },
+          { question: "¿Qué incluye la nota preoperatoria?", accepted: ["plan quirúrgico", "diagnóstico", "pronóstico", "tipo de intervención"], explanation: "La nota preoperatoria resume datos importantes como diagnóstico, plan quirúrgico y pronóstico." },
+          { question: "¿Qué significa PRN?", accepted: ["si es necesario", "cuando sea necesario"], explanation: "PRN significa que la orden se ejecuta solo si el paciente lo requiere según parámetros indicados." },
+          { question: "¿Qué debe llevar toda anotación?", accepted: ["fecha y hora", "firma", "nombre"], explanation: "Toda anotación clínica debe llevar fecha, hora y firma para asegurar trazabilidad." },
+          { question: "¿Por qué es importante la confidencialidad?", accepted: ["proteger al paciente", "privacidad", "seguridad legal"], explanation: "La confidencialidad protege la privacidad del paciente y el correcto manejo de la información clínica." }
         ],
         quiz: [
-          {
-            question: "¿Cuál es una característica correcta de las anotaciones en el expediente clínico?",
-            options: ["Pueden tener tachaduras si se entienden", "Deben redactarse con claridad y objetividad", "Pueden omitirse horas", "Pueden tener abreviaturas no autorizadas"],
-            correctIndex: 1,
-            explanation: "Las anotaciones deben ser claras, objetivas y exactas."
-          },
-          {
-            question: "¿Qué tipo de orden médica se cumple solo si es necesario?",
-            options: ["STAT", "Rutinaria", "PRN", "Verbal"],
-            correctIndex: 2,
-            explanation: "PRN significa 'si es necesario' y se aplica según los parámetros indicados."
-          },
-          {
-            question: "¿Qué documento incluye plan quirúrgico, fecha, diagnóstico y pronóstico?",
-            options: ["Hoja de signos vitales", "Nota preoperatoria", "Ticket de farmacia", "Hoja de valores"],
-            correctIndex: 1,
-            explanation: "La nota preoperatoria resume datos esenciales antes de la intervención quirúrgica."
-          }
+          { question: "¿Cuál es una característica correcta de las anotaciones en el expediente clínico?", options: ["Pueden tener tachaduras si se entienden", "Deben redactarse con claridad y objetividad", "Pueden omitirse horas", "Pueden tener abreviaturas no autorizadas"], correctIndex: 1, explanation: "Las anotaciones deben ser claras, objetivas y exactas." },
+          { question: "¿Qué tipo de orden médica se cumple solo si es necesario?", options: ["STAT", "Rutinaria", "PRN", "Verbal"], correctIndex: 2, explanation: "PRN significa 'si es necesario' y se aplica según los parámetros indicados." },
+          { question: "¿Qué documento incluye plan quirúrgico, fecha, diagnóstico y pronóstico?", options: ["Hoja de signos vitales", "Nota preoperatoria", "Ticket de farmacia", "Hoja de valores"], correctIndex: 1, explanation: "La nota preoperatoria resume datos esenciales antes de la intervención quirúrgica." },
+          { question: "¿Cuál es el carácter del expediente clínico?", options: ["Recreativo", "Legal y confidencial", "Informal", "Privado sin valor"], correctIndex: 1, explanation: "El expediente clínico tiene valor legal y debe manejarse con confidencialidad." },
+          { question: "¿Qué documento informa al paciente sobre riesgos y beneficios?", options: ["Hoja de alta", "Consentimiento informado", "Receta médica", "Bitácora"], correctIndex: 1, explanation: "El consentimiento informado explica el procedimiento y requiere autorización escrita." },
+          { question: "¿Qué debe incluir toda anotación clínica?", options: ["Color favorito del paciente", "Fecha y hora", "Solo firma", "Solo observación"], correctIndex: 1, explanation: "Toda anotación debe incluir fecha y hora para mantener orden cronológico." },
+          { question: "¿Qué debe evitarse en el expediente?", options: ["Objetividad", "Letra legible", "Abreviaturas no autorizadas", "Datos completos"], correctIndex: 2, explanation: "Las abreviaturas no autorizadas pueden generar errores y deben evitarse." },
+          { question: "¿Cuál es función de la nota de enfermería?", options: ["Hacer diagnósticos médicos", "Registrar cuidados y evolución", "Sustituir al médico", "Dar alta al paciente"], correctIndex: 1, explanation: "La nota de enfermería registra observaciones, cuidados y evolución del paciente." }
         ],
         blocks: [
           { title: "Definición y carácter", content: "El expediente clínico reúne documentos para diagnóstico, tratamiento y cuidados. Tiene carácter legal, ético y confidencial." },
           { title: "Anotaciones correctas", content: "Las notas deben ser objetivas, exactas, con fecha, hora, nombre, firma y sin tachaduras ni abreviaturas no autorizadas." },
-          { title: "Documentación preoperatoria", content: "Incluye interconsulta, exámenes preoperatorios, consentimiento informado, nota preoperatoria, solicitud de quirófano y evaluación preoperatoria." }
+          { title: "Documentación preoperatoria", content: "Incluye interconsulta, exámenes preoperatorios, consentimiento informado, nota preoperatoria, solicitud de quirófano y evaluación preoperatoria." },
+          { title: "Responsabilidad de enfermería", content: "Enfermería debe registrar con claridad, exactitud y oportunidad los cuidados brindados al paciente." }
         ],
         blast: [
           { question: "Orden STAT", answer: "inmediata y una sola vez" },
           { question: "PRN", answer: "si es necesario" },
           { question: "Expediente clínico", answer: "legal y confidencial" },
           { question: "Consentimiento informado", answer: "autorización escrita" },
-          { question: "Nota preoperatoria", answer: "plan quirúrgico y diagnóstico" }
+          { question: "Nota preoperatoria", answer: "plan quirúrgico y diagnóstico" },
+          { question: "Anotaciones", answer: "claras y objetivas" },
+          { question: "Confidencialidad", answer: "protege al paciente" },
+          { question: "Nota de enfermería", answer: "registra cuidados" }
         ],
         combine: [
           { left: "STAT", right: "Se cumple inmediatamente" },
           { left: "PRN", right: "Si es necesario" },
           { left: "Consentimiento informado", right: "Autorización escrita del procedimiento" },
-          { left: "Nota preoperatoria", right: "Resume plan quirúrgico y pronóstico" }
+          { left: "Nota preoperatoria", right: "Resume plan quirúrgico y pronóstico" },
+          { left: "Confidencialidad", right: "Protección de la información del paciente" },
+          { left: "Nota de enfermería", right: "Registro de cuidados y evolución" }
         ]
       }
     };
@@ -909,22 +1016,23 @@
         name: "Mixto",
         shortName: "Mixto",
         description: "Combina posiciones, instrumentación y expediente clínico para un repaso más completo.",
-        flashcards: [],
-        learn: [],
-        quiz: [],
-        blocks: [],
-        blast: [],
-        combine: []
+        summary: {
+          title: "Resumen general",
+          text: "El modo mixto combina los tres temas para un repaso más completo, parecido a una evaluación integradora. Aquí se unen seguridad del paciente, instrumentación quirúrgica y documentación clínica.",
+          points: [
+            "Repasa conceptos de seguridad, posiciones y movilización del paciente.",
+            "Incluye instrumental, tiempos quirúrgicos y funciones de la instrumentista.",
+            "Refuerza la documentación legal y clínica del expediente y las notas médicas."
+          ]
+        },
+        flashcards: [], learn: [], quiz: [], blocks: [], blast: [], combine: []
       };
 
       [topics.posiciones, topics.instrumentacion, topics.expediente].forEach(topic => {
         mixed.flashcards.push(...topic.flashcards);
         mixed.learn.push(...topic.learn);
         mixed.quiz.push(...topic.quiz);
-        mixed.blocks.push(...topic.blocks.map(block => ({
-          title: `${topic.shortName}: ${block.title}`,
-          content: block.content
-        })));
+        mixed.blocks.push(...topic.blocks.map(block => ({ title: `${topic.shortName}: ${block.title}`, content: block.content })));
         mixed.blast.push(...topic.blast);
         mixed.combine.push(...topic.combine);
       });
@@ -1039,6 +1147,7 @@
 
     function renderViewer() {
       const topic = topics[currentTopic];
+      renderTermsPanel(topic);
 
       if (currentMode === "flashcards") return renderFlashcards(topic);
       if (currentMode === "learn") return renderLearn(topic);
@@ -1046,6 +1155,39 @@
       if (currentMode === "blocks") return renderBlocks(topic);
       if (currentMode === "blast") return renderBlast(topic);
       if (currentMode === "combine") return renderCombine(topic);
+    }
+
+    function renderTermsPanel(topic) {
+      const total = topic.flashcards.length;
+      const mastered = Math.min(2, total);
+      const inProgress = Math.min(11, Math.max(0, total - mastered));
+      const notStudied = Math.max(0, total - mastered - inProgress);
+      const masteredItems = topic.flashcards.slice(0, mastered);
+      const inProgressItems = topic.flashcards.slice(mastered, mastered + inProgress);
+      const notStudiedItems = topic.flashcards.slice(mastered + inProgress);
+
+      const sectionHTML = (title, subtitle, items) => `
+        <div class="term-section">
+          <h4>${title} (${items.length})</h4>
+          <p>${subtitle}</p>
+          <div class="term-list">
+            ${items.map(item => `
+              <div class="term-card">
+                <strong>${item.front}</strong>
+                <span>${item.back}</span>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+
+      document.getElementById("termsPanel").innerHTML = `
+        <h3>Términos de la unidad (${total})</h3>
+        <p>Tus estadísticas</p>
+        ${sectionHTML("En progreso", "Comenzaste a estudiar estos términos. ¡Sigue así!", inProgressItems)}
+        ${sectionHTML("Dominados", "¡Has respondido correctamente estos términos!", masteredItems)}
+        ${sectionHTML("No estudiados", "¡Todavía no has estudiado estos términos!", notStudiedItems)}
+      `;
     }
 
     function headerHTML(title, subtitle) {
@@ -1247,8 +1389,19 @@
     function renderBlocks(topic) {
       const items = topic.blocks;
       updateMiniPanel(`${state.blocks.openSet.size} abiertos`, 0);
+      const summary = topic.summary;
       viewer.innerHTML = `
         ${headerHTML("Bloques", "Abre cada bloque para estudiar el tema por partes.")}
+        <div class="block-box">
+          <div class="question-title">${summary.title}</div>
+          <p style="color:var(--muted); line-height:1.7;">${summary.text}</p>
+          <div class="feedback" style="margin-top:14px;">
+            <strong>Puntos importantes:</strong>
+            <ul style="margin:10px 0 0 18px; color:var(--muted); line-height:1.7;">
+              ${summary.points.map(point => `<li>${point}</li>`).join("")}
+            </ul>
+          </div>
+        </div>
         <div class="block-list">
           ${items.map((block, i) => `
             <div class="block-item ${state.blocks.openSet.has(i) ? "open" : ""}">
