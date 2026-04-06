@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediGuía Study</title>
+  <style>
+    :root {
+      --bg: #0a0f2c;
+      --bg-soft: #12193f;
+      --card: #1c2758;
+      --card-2: #24336e;
+      --accent: #5c7cff;
+      --accent-2: #46c2ff;
+      --text: #eef3ff;
+      --muted: #b9c4ea;
+      --success: #34d399;
+      --danger: #fb7185;
+      --warning: #fbbf24;
+      --shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #111a50 0%, var(--bg) 48%, #060919 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 60px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(92, 124, 255, 0.2), rgba(70, 194, 255, 0.1));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      margin-bottom: 24px;
+    }
+
+    .hero-top {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .status-card {
+      min-width: 250px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .status-card small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .status-main {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .panel {
+      background: rgba(12, 17, 47, 0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .panel-title h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .panel-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    .topic-grid, .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .mode-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .topic-card,
+    .mode-card {
+      background: linear-gradient(180deg, var(--card-2), var(--card));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px;
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+
+    .topic-card:hover,
+    .mode-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(92,124,255,0.8);
+    }
+
+    .topic-card.active,
+    .mode-card.active {
+      outline: 2px solid var(--accent-2);
+      background: linear-gradient(180deg, #3148a0, #23336d);
+    }
+
+    .topic-card h3,
+    .mode-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .topic-card p,
+    .mode-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.93rem;
+    }
+
+    .mode-icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .viewer, .sidebox {
+      background: rgba(12, 17, 47, 0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .viewer {
+      padding: 24px;
+      min-height: 540px;
+    }
+
+    .sidebox {
+      padding: 18px;
+      position: sticky;
+      top: 18px;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stat strong {
+      font-size: 1.2rem;
+    }
+
+    .side-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .btn,
+    .ghost-btn,
+    .answer-btn,
+    .option-btn,
+    .match-btn {
+      border: none;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .ghost-btn {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .ghost-btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(92,124,255,0.18);
+      border: 1px solid rgba(92,124,255,0.3);
+      margin-bottom: 12px;
+      color: #dce7ff;
+      font-size: 0.92rem;
+    }
+
+    .mode-header h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+    }
+
+    .mode-header p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 10px 0 0;
+    }
+
+    .card-stage {
+      perspective: 1200px;
+      margin-top: 20px;
+    }
+
+    .flashcard {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+      cursor: pointer;
+    }
+
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flash-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      background: linear-gradient(180deg, #24367a, #182456);
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: var(--shadow);
+    }
+
+    .flash-face.back {
+      transform: rotateY(180deg);
+      background: linear-gradient(180deg, #1f7466, #115149);
+    }
+
+    .flash-label {
+      color: #cdd8ff;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .flash-text {
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .flash-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .learn-box,
+    .quiz-box,
+    .blast-box,
+    .combine-box,
+    .block-box {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 22px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .question-title {
+      font-size: clamp(1.2rem, 2.8vw, 1.75rem);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .text-input {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(7, 10, 28, 0.75);
+      color: white;
+      padding: 14px 16px;
+      outline: none;
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+
+    .text-input:focus {
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 3px rgba(70, 194, 255, 0.18);
+    }
+
+    .answer-btn,
+    .option-btn,
+    .match-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      color: white;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .answer-btn:hover,
+    .option-btn:hover,
+    .match-btn:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .answer-btn.correct,
+    .option-btn.correct,
+    .match-btn.correct {
+      background: rgba(52, 211, 153, 0.2);
+      border-color: rgba(52, 211, 153, 0.6);
+    }
+
+    .answer-btn.incorrect,
+    .option-btn.incorrect,
+    .match-btn.incorrect {
+      background: rgba(251, 113, 133, 0.18);
+      border-color: rgba(251, 113, 133, 0.6);
+    }
+
+    .feedback,
+    .explanation,
+    .result-box,
+    .helper-note {
+      margin-top: 14px;
+      border-radius: 16px;
+      padding: 14px 16px;
+      line-height: 1.55;
+    }
+
+    .feedback,
+    .explanation,
+    .helper-note {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .result-box {
+      background: rgba(92,124,255,0.14);
+      border: 1px solid rgba(92,124,255,0.3);
+    }
+
+    .scoreline {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .block-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .block-item {
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+
+    .block-head {
+      width: 100%;
+      padding: 16px 18px;
+      background: transparent;
+      color: white;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .block-content {
+      padding: 0 18px 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      display: none;
+    }
+
+    .block-item.open .block-content {
+      display: block;
+    }
+
+    .timer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(251,191,36,0.15);
+      color: #fde68a;
+      border: 1px solid rgba(251,191,36,0.25);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .match-column h4 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: #d9e4ff;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      text-align: center;
+      margin-top: 22px;
+      font-size: 0.92rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 980px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebox {
+        position: static;
+      }
+
+      .mode-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topic-grid,
+      .mode-grid,
+      .match-grid,
+      .mini-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .viewer,
+      .panel,
+      .hero,
+      .sidebox {
+        padding: 18px;
+      }
+
+      .flash-text {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="brand">🩺 MediGuía Study</div>
+          <h1>Repasa por tema o en modo mixto</h1>
+          <p>
+            Elige entre <strong>Posiciones Quirúrgicas</strong>, <strong>Instrumentación Quirúrgica</strong>,
+            <strong>Expediente Clínico</strong> o <strong>Mixto</strong>. Luego estudia con los 6 modos:
+            <strong>Fichas</strong>, <strong>Aprender</strong>, <strong>Probar</strong>, <strong>Bloques</strong>,
+            <strong>Blast</strong> y <strong>Combinar</strong>.
+          </p>
+          <div class="chips">
+            <span class="chip">4 temas</span>
+            <span class="chip">6 modos</span>
+            <span class="chip">Sin depender de Quizlet</span>
+            <span class="chip">Hecho para repasar rápido</span>
+          </div>
+        </div>
+
+        <div class="status-card">
+          <small>Tema actual</small>
+          <div id="statusTopic" class="status-main">Posiciones Quirúrgicas</div>
+          <small>Modo actual</small>
+          <div id="statusMode" class="status-main">Fichas</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <div>
+          <h2>1. Escoge el tema</h2>
+          <div class="panel-subtitle">Puedes estudiar un solo tema o mezclarlos todos.</div>
+        </div>
+      </div>
+      <div id="topicGrid" class="topic-grid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <div>
+          <h2>2. Escoge el modo</h2>
+          <div class="panel-subtitle">Cada modo repasa el contenido de una manera distinta.</div>
+        </div>
+      </div>
+      <div id="modeGrid" class="mode-grid"></div>
+    </section>
+
+    <section class="workspace">
+      <main id="viewer" class="viewer"></main>
+
+      <aside class="sidebox">
+        <div class="panel-title" style="margin-bottom:12px;">
+          <div>
+            <h2 style="font-size:1.1rem; margin:0;">Panel rápido</h2>
+            <div class="panel-subtitle">Controla tu estudio desde aquí.</div>
+          </div>
+        </div>
+
+        <div class="mini-stats">
+          <div class="stat">
+            <small>Tema</small>
+            <strong id="miniTopic">Posiciones</strong>
+          </div>
+          <div class="stat">
+            <small>Modo</small>
+            <strong id="miniMode">Fichas</strong>
+          </div>
+          <div class="stat">
+            <small>Progreso</small>
+            <strong id="miniProgress">1 / 1</strong>
+          </div>
+          <div class="stat">
+            <small>Aciertos</small>
+            <strong id="miniScore">0</strong>
+          </div>
+        </div>
+
+        <div class="side-actions">
+          <button class="btn" id="resetBtn">Reiniciar modo</button>
+          <button class="ghost-btn" id="randomThemeBtn">Tema aleatorio</button>
+          <button class="ghost-btn" id="randomModeBtn">Modo aleatorio</button>
+        </div>
+
+        <div class="helper-note" style="margin-top:16px;">
+          <strong>Tip:</strong> en <strong>Mixto</strong> se combinan los 3 temas para practicar más parecido a un repaso general.
+        </div>
+      </aside>
+    </section>
+
+    <div class="footer-note">
+      Hecho para repasar con contenido cargado manualmente. Después puedes seguir agregando más preguntas y temas.
+    </div>
+  </div>
+
+  <script>
+    const topics = {
+      posiciones: {
+        name: "Posiciones Quirúrgicas",
+        shortName: "Posiciones",
+        description: "Repaso sobre mesa de operaciones, seguridad del paciente y posiciones operatorias básicas.",
+        flashcards: [
+          { front: "¿Qué son las posiciones quirúrgicas?", back: "Son las posturas en las que se coloca al paciente durante una cirugía para facilitar el procedimiento y proteger su seguridad." },
+          { front: "Decúbito supino", back: "Paciente acostado boca arriba. Es la posición base para muchas cirugías." },
+          { front: "Decúbito prono", back: "Paciente acostado boca abajo. Se usa en cirugías de espalda o columna." },
+          { front: "Decúbito lateral", back: "Paciente acostado de lado. Se usa en nefrectomías o prótesis de cadera." },
+          { front: "Trendelenburg", back: "Paciente con la cabeza más abajo que los pies. Útil en cirugías pélvicas." },
+          { front: "Trendelenburg invertida", back: "Paciente con la cabeza más arriba que los pies. Útil en cuello o cráneo." },
+          { front: "Litotomía", back: "Paciente boca arriba con piernas elevadas y separadas. Usada en ginecología y urología." },
+          { front: "Responsabilidad de enfermería", back: "Proteger la seguridad del paciente, prevenir lesiones y vigilar la alineación corporal." }
+        ],
+        learn: [
+          {
+            question: "¿Qué posición coloca al paciente boca arriba?",
+            accepted: ["decúbito supino", "supino"],
+            explanation: "La posición supina o decúbito supino coloca al paciente boca arriba y es la posición base para múltiples procedimientos."
+          },
+          {
+            question: "¿Qué posición deja la cabeza más abajo que los pies?",
+            accepted: ["trendelenburg"],
+            explanation: "Trendelenburg se usa cuando la cabeza queda más abajo que los pies, sobre todo en cirugías pélvicas."
+          },
+          {
+            question: "¿Cuántas personas se recomiendan para mover a un paciente inconsciente?",
+            accepted: ["4", "cuatro", "mínimo 4", "minimo 4", "4 personas", "cuatro personas"],
+            explanation: "Se recomienda movilizar a un paciente inconsciente con mínimo 4 personas para evitar lesiones y mantener la seguridad."
+          }
+        ],
+        quiz: [
+          {
+            question: "¿Qué posición se usa como base en muchas cirugías?",
+            options: ["Decúbito prono", "Decúbito supino", "Litotomía", "Trendelenburg"],
+            correctIndex: 1,
+            explanation: "El decúbito supino es la posición base o estándar para muchas intervenciones quirúrgicas."
+          },
+          {
+            question: "¿Qué posición se asocia a procedimientos ginecológicos y urológicos?",
+            options: ["Litotomía", "Trendelenburg invertida", "Decúbito lateral", "Decúbito prono"],
+            correctIndex: 0,
+            explanation: "La litotomía coloca al paciente boca arriba con piernas elevadas y separadas."
+          },
+          {
+            question: "¿Qué debe proteger enfermería para evitar lesiones por presión?",
+            options: ["Solo los pies", "Únicamente la espalda", "Los puntos de apoyo", "Solo la cabeza"],
+            correctIndex: 2,
+            explanation: "Enfermería debe proteger los puntos de apoyo para evitar lesiones nerviosas, musculares o por presión."
+          }
+        ],
+        blocks: [
+          { title: "Mesa de operaciones", content: "Es articulable y ajustable. Tiene secciones como cabecera, tronco y piernas. Permite adaptar la posición del paciente según el procedimiento quirúrgico." },
+          { title: "Seguridad del paciente", content: "Se debe verificar identidad, asegurar frenos, coordinar movimientos con el anestesiólogo y proteger los puntos de apoyo." },
+          { title: "Posiciones básicas", content: "Supino = boca arriba. Prono = boca abajo. Lateral = de lado. Trendelenburg = cabeza abajo. Trendelenburg invertida = cabeza arriba. Litotomía = piernas elevadas." }
+        ],
+        blast: [
+          { question: "Supino", answer: "boca arriba" },
+          { question: "Prono", answer: "boca abajo" },
+          { question: "Lateral", answer: "de lado" },
+          { question: "Trendelenburg", answer: "cabeza abajo" },
+          { question: "Litotomía", answer: "piernas elevadas" }
+        ],
+        combine: [
+          { left: "Decúbito supino", right: "Paciente boca arriba" },
+          { left: "Decúbito prono", right: "Paciente boca abajo" },
+          { left: "Trendelenburg", right: "Cabeza más abajo que los pies" },
+          { left: "Litotomía", right: "Piernas elevadas y separadas" }
+        ]
+      },
+
+      instrumentacion: {
+        name: "Instrumentación Quirúrgica",
+        shortName: "Instrumentación",
+        description: "Repaso sobre instrumental quirúrgico, clasificación, tiempos quirúrgicos y técnica de instrumentar.",
+        flashcards: [
+          { front: "¿Qué es la técnica de instrumentar el acto quirúrgico?", back: "Consiste en proveer de insumos quirúrgicos al cirujano durante un procedimiento mediante técnica estéril." },
+          { front: "Objetivo principal de la instrumentista", back: "Asistir al equipo quirúrgico aséptico anticipándose a sus necesidades con conocimientos precisos de la técnica quirúrgica." },
+          { front: "Instrumental de diéresis o corte", back: "Se usa para seccionar, cortar o extirpar tejidos y materiales. Ejemplos: bisturí y tijeras." },
+          { front: "Instrumental de separación", back: "Sirve para retraer tejidos u órganos y mejorar la visión del campo operatorio." },
+          { front: "Instrumental de aprehensión", back: "Se usa para tomar tejidos, estructuras u objetos." },
+          { front: "Instrumental de hemostasia", back: "Se usa para detener sangrado. Ejemplos: pinzas mosquito, Kelly, Rochester y electrobisturí." },
+          { front: "Instrumental de síntesis", back: "Sirve para suturar tejidos y restablecer su continuidad." },
+          { front: "Cinco momentos quirúrgicos", back: "Posición operatoria, antisepsia y campos, diéresis, operación propiamente dicha y síntesis." }
+        ],
+        learn: [
+          {
+            question: "¿Qué instrumental se usa para realizar hemostasia?",
+            accepted: ["instrumental de hemostasia", "hemostasia", "pinzas hemostáticas"],
+            explanation: "El instrumental de hemostasia se utiliza para controlar el sangrado. Entre los ejemplos están pinzas mosquito, Kelly y Rochester."
+          },
+          {
+            question: "¿Cómo se llama el tiempo quirúrgico en el que se cortan los tejidos?",
+            accepted: ["diéresis", "dieresis"],
+            explanation: "La diéresis es el tiempo quirúrgico relacionado con la incisión o sección metódica de los tejidos."
+          },
+          {
+            question: "Menciona uno de los cinco momentos quirúrgicos.",
+            accepted: ["posición operatoria", "antisepsia", "diéresis", "dieresis", "operación propiamente dicha", "síntesis", "sintesis"],
+            explanation: "Los cinco momentos quirúrgicos incluyen posición operatoria, antisepsia y campos, diéresis, operación propiamente dicha y síntesis."
+          }
+        ],
+        quiz: [
+          {
+            question: "¿Cuál es un ejemplo de instrumental de corte?",
+            options: ["Pinza mosquito", "Bisturí", "Balfour", "Backhaus"],
+            correctIndex: 1,
+            explanation: "El bisturí pertenece al instrumental de diéresis o corte."
+          },
+          {
+            question: "¿Cuál de estos forma parte de los cinco momentos quirúrgicos?",
+            options: ["Valoración nutricional", "Síntesis", "Historia laboral", "Farmacología"],
+            correctIndex: 1,
+            explanation: "La síntesis es uno de los cinco momentos quirúrgicos fundamentales."
+          },
+          {
+            question: "¿Qué instrumental se usa para retraer tejidos y mejorar la visión del campo operatorio?",
+            options: ["Síntesis", "Separación", "Aprehensión", "Drenaje"],
+            correctIndex: 1,
+            explanation: "El instrumental de separación sirve para retraer tejidos u órganos."
+          }
+        ],
+        blocks: [
+          { title: "Definición", content: "Instrumentar el acto quirúrgico consiste en proveer de insumos al cirujano durante un procedimiento a través de técnica estéril." },
+          { title: "Clasificación funcional", content: "El instrumental puede clasificarse según función en corte, separación, aprehensión, hemostasia, síntesis y drenaje." },
+          { title: "Tiempos quirúrgicos", content: "Los momentos importantes incluyen posición operatoria, antisepsia y colocación de campos, diéresis, operación propiamente dicha y síntesis." }
+        ],
+        blast: [
+          { question: "Diéresis", answer: "corte o incisión" },
+          { question: "Hemostasia", answer: "detener sangrado" },
+          { question: "Síntesis", answer: "suturar o unir tejidos" },
+          { question: "Separación", answer: "retraer tejidos" },
+          { question: "Aprehensión", answer: "tomar tejidos u objetos" }
+        ],
+        combine: [
+          { left: "Diéresis", right: "Corte o sección de tejidos" },
+          { left: "Hemostasia", right: "Control del sangrado" },
+          { left: "Síntesis", right: "Sutura y cierre" },
+          { left: "Separación", right: "Retracción de tejidos" }
+        ]
+      },
+
+      expediente: {
+        name: "Expediente Clínico",
+        shortName: "Expediente",
+        description: "Repaso sobre documentación clínica pre, trans y post operatoria, notas y registros.",
+        flashcards: [
+          { front: "¿Qué es el expediente clínico?", back: "Es el conjunto de documentos escritos, gráficos e imagenológicos donde se integran datos para diagnóstico, tratamiento y cuidados de enfermería." },
+          { front: "Carácter del expediente clínico", back: "Tiene carácter legal, confidencial y es propiedad de la institución." },
+          { front: "¿Cómo deben ser las anotaciones?", back: "Deben ser exactas, objetivas, claras, en español, con letra legible y sin abreviaturas no autorizadas." },
+          { front: "Hoja de órdenes médicas", back: "Documento donde el médico prescribe tratamientos o servicios para el paciente." },
+          { front: "Órdenes STAT", back: "Deben cumplirse inmediatamente y por una sola vez." },
+          { front: "Órdenes PRN", back: "Se ejecutan si es necesario según parámetros indicados por el médico." },
+          { front: "Consentimiento informado", back: "Documento que informa al paciente o tutor sobre el procedimiento y sus riesgos, y debe firmarse por escrito." },
+          { front: "Nota preoperatoria", back: "Incluye plan quirúrgico, fecha, diagnóstico, tipo de intervención, cuidados preoperatorios y pronóstico." }
+        ],
+        learn: [
+          {
+            question: "¿Qué carácter tiene el expediente clínico?",
+            accepted: ["legal y confidencial", "legal, confidencial", "legal confidencial", "legal", "confidencial y legal"],
+            explanation: "El expediente clínico es un documento de carácter legal, confidencial y propiedad de la institución."
+          },
+          {
+            question: "¿Cómo se llaman las órdenes que deben cumplirse inmediatamente una sola vez?",
+            accepted: ["stat", "órdenes stat", "ordenes stat"],
+            explanation: "Las órdenes STAT se ejecutan de forma inmediata y por una sola vez."
+          },
+          {
+            question: "¿Qué documento informa al paciente sobre riesgos y requiere autorización escrita?",
+            accepted: ["consentimiento informado", "hoja de autorización", "autorización o consentimiento informado"],
+            explanation: "El consentimiento informado da soporte legal y ético e informa sobre el procedimiento y sus posibles complicaciones."
+          }
+        ],
+        quiz: [
+          {
+            question: "¿Cuál es una característica correcta de las anotaciones en el expediente clínico?",
+            options: ["Pueden tener tachaduras si se entienden", "Deben redactarse con claridad y objetividad", "Pueden omitirse horas", "Pueden tener abreviaturas no autorizadas"],
+            correctIndex: 1,
+            explanation: "Las anotaciones deben ser claras, objetivas y exactas."
+          },
+          {
+            question: "¿Qué tipo de orden médica se cumple solo si es necesario?",
+            options: ["STAT", "Rutinaria", "PRN", "Verbal"],
+            correctIndex: 2,
+            explanation: "PRN significa 'si es necesario' y se aplica según los parámetros indicados."
+          },
+          {
+            question: "¿Qué documento incluye plan quirúrgico, fecha, diagnóstico y pronóstico?",
+            options: ["Hoja de signos vitales", "Nota preoperatoria", "Ticket de farmacia", "Hoja de valores"],
+            correctIndex: 1,
+            explanation: "La nota preoperatoria resume datos esenciales antes de la intervención quirúrgica."
+          }
+        ],
+        blocks: [
+          { title: "Definición y carácter", content: "El expediente clínico reúne documentos para diagnóstico, tratamiento y cuidados. Tiene carácter legal, ético y confidencial." },
+          { title: "Anotaciones correctas", content: "Las notas deben ser objetivas, exactas, con fecha, hora, nombre, firma y sin tachaduras ni abreviaturas no autorizadas." },
+          { title: "Documentación preoperatoria", content: "Incluye interconsulta, exámenes preoperatorios, consentimiento informado, nota preoperatoria, solicitud de quirófano y evaluación preoperatoria." }
+        ],
+        blast: [
+          { question: "Orden STAT", answer: "inmediata y una sola vez" },
+          { question: "PRN", answer: "si es necesario" },
+          { question: "Expediente clínico", answer: "legal y confidencial" },
+          { question: "Consentimiento informado", answer: "autorización escrita" },
+          { question: "Nota preoperatoria", answer: "plan quirúrgico y diagnóstico" }
+        ],
+        combine: [
+          { left: "STAT", right: "Se cumple inmediatamente" },
+          { left: "PRN", right: "Si es necesario" },
+          { left: "Consentimiento informado", right: "Autorización escrita del procedimiento" },
+          { left: "Nota preoperatoria", right: "Resume plan quirúrgico y pronóstico" }
+        ]
+      }
+    };
+
+    function buildMixedTopic() {
+      const mixed = {
+        name: "Mixto",
+        shortName: "Mixto",
+        description: "Combina posiciones, instrumentación y expediente clínico para un repaso más completo.",
+        flashcards: [],
+        learn: [],
+        quiz: [],
+        blocks: [],
+        blast: [],
+        combine: []
+      };
+
+      [topics.posiciones, topics.instrumentacion, topics.expediente].forEach(topic => {
+        mixed.flashcards.push(...topic.flashcards);
+        mixed.learn.push(...topic.learn);
+        mixed.quiz.push(...topic.quiz);
+        mixed.blocks.push(...topic.blocks.map(block => ({
+          title: `${topic.shortName}: ${block.title}`,
+          content: block.content
+        })));
+        mixed.blast.push(...topic.blast);
+        mixed.combine.push(...topic.combine);
+      });
+
+      return mixed;
+    }
+
+    topics.mixto = buildMixedTopic();
+
+    const modes = [
+      { id: "flashcards", name: "Fichas", icon: "🗂️", description: "Tarjetas que se voltean para memorizar más rápido." },
+      { id: "learn", name: "Aprender", icon: "🧠", description: "Responde y recibe retroalimentación para fijar mejor el tema." },
+      { id: "quiz", name: "Probar", icon: "📝", description: "Mini examen de opción múltiple con puntaje al final." },
+      { id: "blocks", name: "Bloques", icon: "🧩", description: "Repaso por secciones ordenadas para estudiar con calma." },
+      { id: "blast", name: "Blast", icon: "🚀", description: "Modo rápido para responder conceptos clave en cadena." },
+      { id: "combine", name: "Combinar", icon: "🔗", description: "Une términos con definiciones para practicar memoria." }
+    ];
+
+    let currentTopic = "posiciones";
+    let currentMode = "flashcards";
+
+    const state = {
+      flashcards: { index: 0, flipped: false },
+      learn: { index: 0, score: 0, answered: false },
+      quiz: { index: 0, score: 0, answered: false },
+      blocks: { openSet: new Set([0]) },
+      blast: { index: 0, score: 0, secondsLeft: 45, timer: null, started: false, answered: false },
+      combine: { selectedLeft: null, selectedRight: null, matched: [], attempts: 0 }
+    };
+
+    const topicGrid = document.getElementById("topicGrid");
+    const modeGrid = document.getElementById("modeGrid");
+    const viewer = document.getElementById("viewer");
+
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function resetModeState(mode = currentMode) {
+      if (mode === "flashcards") {
+        state.flashcards = { index: 0, flipped: false };
+      }
+      if (mode === "learn") {
+        state.learn = { index: 0, score: 0, answered: false };
+      }
+      if (mode === "quiz") {
+        state.quiz = { index: 0, score: 0, answered: false };
+      }
+      if (mode === "blocks") {
+        state.blocks = { openSet: new Set([0]) };
+      }
+      if (mode === "blast") {
+        if (state.blast.timer) clearInterval(state.blast.timer);
+        state.blast = { index: 0, score: 0, secondsLeft: 45, timer: null, started: false, answered: false };
+      }
+      if (mode === "combine") {
+        state.combine = { selectedLeft: null, selectedRight: null, matched: [], attempts: 0 };
+      }
+      renderViewer();
+    }
+
+    function renderTopicCards() {
+      topicGrid.innerHTML = Object.entries(topics).map(([key, topic]) => `
+        <button class="topic-card ${key === currentTopic ? "active" : ""}" data-topic="${key}">
+          <h3>${topic.name}</h3>
+          <p>${topic.description}</p>
+        </button>
+      `).join("");
+
+      topicGrid.querySelectorAll(".topic-card").forEach(card => {
+        card.addEventListener("click", () => {
+          currentTopic = card.dataset.topic;
+          resetModeState(currentMode);
+          renderAll();
+        });
+      });
+    }
+
+    function renderModeCards() {
+      modeGrid.innerHTML = modes.map(mode => `
+        <button class="mode-card ${mode.id === currentMode ? "active" : ""}" data-mode="${mode.id}">
+          <span class="mode-icon">${mode.icon}</span>
+          <h3>${mode.name}</h3>
+          <p>${mode.description}</p>
+        </button>
+      `).join("");
+
+      modeGrid.querySelectorAll(".mode-card").forEach(card => {
+        card.addEventListener("click", () => {
+          currentMode = card.dataset.mode;
+          resetModeState(currentMode);
+          renderAll();
+        });
+      });
+    }
+
+    function updateMiniPanel(progressText = "1 / 1", scoreValue = 0) {
+      const topic = topics[currentTopic];
+      const mode = modes.find(m => m.id === currentMode);
+      document.getElementById("statusTopic").textContent = topic.name;
+      document.getElementById("statusMode").textContent = mode.name;
+      document.getElementById("miniTopic").textContent = topic.shortName;
+      document.getElementById("miniMode").textContent = mode.name;
+      document.getElementById("miniProgress").textContent = progressText;
+      document.getElementById("miniScore").textContent = scoreValue;
+    }
+
+    function renderViewer() {
+      const topic = topics[currentTopic];
+
+      if (currentMode === "flashcards") return renderFlashcards(topic);
+      if (currentMode === "learn") return renderLearn(topic);
+      if (currentMode === "quiz") return renderQuiz(topic);
+      if (currentMode === "blocks") return renderBlocks(topic);
+      if (currentMode === "blast") return renderBlast(topic);
+      if (currentMode === "combine") return renderCombine(topic);
+    }
+
+    function headerHTML(title, subtitle) {
+      return `
+        <div class="mode-header">
+          <div class="section-badge">📘 ${topics[currentTopic].name}</div>
+          <h2>${title}</h2>
+          <p>${subtitle}</p>
+        </div>
+      `;
+    }
+
+    function renderFlashcards(topic) {
+      const items = topic.flashcards;
+      const total = items.length;
+      const index = state.flashcards.index % total;
+      const item = items[index];
+      const flipped = state.flashcards.flipped;
+      updateMiniPanel(`${index + 1} / ${total}`, 0);
+
+      viewer.innerHTML = `
+        ${headerHTML("Fichas", "Haz clic en la tarjeta para voltearla. Usa los botones para avanzar o retroceder.")}
+        <div class="card-stage">
+          <div id="flashcard" class="flashcard ${flipped ? "flipped" : ""}">
+            <div class="flash-face front">
+              <div class="flash-label">Frente</div>
+              <div class="flash-text">${item.front}</div>
+            </div>
+            <div class="flash-face back">
+              <div class="flash-label">Reverso</div>
+              <div class="flash-text">${item.back}</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-controls">
+          <button class="ghost-btn" id="prevFlash">⬅️ Anterior</button>
+          <button class="btn" id="flipFlash">🔄 Voltear</button>
+          <button class="ghost-btn" id="nextFlash">Siguiente ➡️</button>
+        </div>
+      `;
+
+      document.getElementById("flashcard").addEventListener("click", () => {
+        state.flashcards.flipped = !state.flashcards.flipped;
+        renderViewer();
+      });
+
+      document.getElementById("flipFlash").addEventListener("click", () => {
+        state.flashcards.flipped = !state.flashcards.flipped;
+        renderViewer();
+      });
+
+      document.getElementById("prevFlash").addEventListener("click", () => {
+        state.flashcards.index = (index - 1 + total) % total;
+        state.flashcards.flipped = false;
+        renderViewer();
+      });
+
+      document.getElementById("nextFlash").addEventListener("click", () => {
+        state.flashcards.index = (index + 1) % total;
+        state.flashcards.flipped = false;
+        renderViewer();
+      });
+    }
+
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
+    function renderLearn(topic) {
+      const items = topic.learn;
+      const total = items.length;
+      const index = state.learn.index;
+      const item = items[index];
+      updateMiniPanel(`${Math.min(index + 1, total)} / ${total}`, state.learn.score);
+
+      if (!item) {
+        viewer.innerHTML = `
+          ${headerHTML("Aprender", "Terminaste este modo. Puedes reiniciarlo o cambiar de tema.")}
+          <div class="result-box">
+            <div class="scoreline">Aciertos: ${state.learn.score} / ${total}</div>
+            <p>Buen trabajo. Este modo te ayuda a recordar activamente y luego recibir explicación.</p>
+          </div>
+          <div class="flash-controls">
+            <button class="btn" id="restartLearn">Reiniciar</button>
+          </div>
+        `;
+        document.getElementById("restartLearn").addEventListener("click", () => resetModeState("learn"));
+        return;
+      }
+
+      viewer.innerHTML = `
+        ${headerHTML("Aprender", "Escribe tu respuesta. Luego revisa si coincide con lo esperado y lee la explicación.")}
+        <div class="learn-box">
+          <div class="question-title">${item.question}</div>
+          <input id="learnInput" class="text-input" type="text" placeholder="Escribe tu respuesta aquí" />
+          <button class="btn" id="checkLearn">Comprobar</button>
+          <div id="learnFeedback"></div>
+        </div>
+      `;
+
+      document.getElementById("checkLearn").addEventListener("click", () => {
+        const value = normalize(document.getElementById("learnInput").value);
+        const isCorrect = item.accepted.some(ans => value.includes(normalize(ans)) || normalize(ans).includes(value));
+        if (isCorrect) state.learn.score += 1;
+
+        document.getElementById("learnFeedback").innerHTML = `
+          <div class="feedback">
+            <strong>${isCorrect ? "✅ Correcto" : "❌ Casi"}</strong><br>
+            ${isCorrect ? "Muy bien, lo recordaste correctamente." : `Respuesta esperada aproximada: <strong>${item.accepted[0]}</strong>.`}
+          </div>
+          <div class="explanation">${item.explanation}</div>
+          <div class="flash-controls">
+            <button class="ghost-btn" id="nextLearn">Siguiente ➡️</button>
+          </div>
+        `;
+
+        document.getElementById("checkLearn").disabled = true;
+        document.getElementById("learnInput").disabled = true;
+        document.getElementById("nextLearn").addEventListener("click", () => {
+          state.learn.index += 1;
+          renderViewer();
+        });
+        updateMiniPanel(`${index + 1} / ${total}`, state.learn.score);
+      });
+    }
+
+    function renderQuiz(topic) {
+      const items = topic.quiz;
+      const total = items.length;
+      const index = state.quiz.index;
+      const item = items[index];
+      updateMiniPanel(`${Math.min(index + 1, total)} / ${total}`, state.quiz.score);
+
+      if (!item) {
+        const percent = Math.round((state.quiz.score / total) * 100);
+        viewer.innerHTML = `
+          ${headerHTML("Probar", "Terminaste el mini examen.")}
+          <div class="result-box">
+            <div class="scoreline">${state.quiz.score} / ${total} correctas</div>
+            <p>Tu porcentaje es <strong>${percent}%</strong>.</p>
+          </div>
+          <div class="flash-controls">
+            <button class="btn" id="restartQuiz">Reiniciar examen</button>
+          </div>
+        `;
+        document.getElementById("restartQuiz").addEventListener("click", () => resetModeState("quiz"));
+        return;
+      }
+
+      viewer.innerHTML = `
+        ${headerHTML("Probar", "Escoge una opción. Al responder verás la explicación antes de continuar.")}
+        <div class="quiz-box">
+          <div class="question-title">${item.question}</div>
+          <div id="quizOptions">
+            ${item.options.map((option, i) => `
+              <button class="option-btn" data-index="${i}">${String.fromCharCode(65 + i)}) ${option}</button>
+            `).join("")}
+          </div>
+          <div id="quizFeedback"></div>
+        </div>
+      `;
+
+      document.querySelectorAll(".option-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const selected = Number(btn.dataset.index);
+          const isCorrect = selected === item.correctIndex;
+          if (isCorrect) state.quiz.score += 1;
+
+          document.querySelectorAll(".option-btn").forEach((optionBtn, idx) => {
+            optionBtn.disabled = true;
+            if (idx === item.correctIndex) optionBtn.classList.add("correct");
+            if (idx === selected && idx !== item.correctIndex) optionBtn.classList.add("incorrect");
+          });
+
+          document.getElementById("quizFeedback").innerHTML = `
+            <div class="feedback">
+              <strong>${isCorrect ? "✅ Correcto" : "❌ Incorrecto"}</strong><br>
+              Respuesta correcta: <strong>${item.options[item.correctIndex]}</strong>
+            </div>
+            <div class="explanation">${item.explanation}</div>
+            <div class="flash-controls">
+              <button class="ghost-btn" id="nextQuiz">Siguiente ➡️</button>
+            </div>
+          `;
+
+          document.getElementById("nextQuiz").addEventListener("click", () => {
+            state.quiz.index += 1;
+            renderViewer();
+          });
+          updateMiniPanel(`${index + 1} / ${total}`, state.quiz.score);
+        });
+      });
+    }
+
+    function renderBlocks(topic) {
+      const items = topic.blocks;
+      updateMiniPanel(`${state.blocks.openSet.size} abiertos`, 0);
+      viewer.innerHTML = `
+        ${headerHTML("Bloques", "Abre cada bloque para estudiar el tema por partes.")}
+        <div class="block-list">
+          ${items.map((block, i) => `
+            <div class="block-item ${state.blocks.openSet.has(i) ? "open" : ""}">
+              <button class="block-head" data-index="${i}">
+                <span>${block.title}</span>
+                <span>${state.blocks.openSet.has(i) ? "−" : "+"}</span>
+              </button>
+              <div class="block-content">${block.content}</div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      document.querySelectorAll(".block-head").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.index);
+          if (state.blocks.openSet.has(idx)) state.blocks.openSet.delete(idx);
+          else state.blocks.openSet.add(idx);
+          renderViewer();
+        });
+      });
+    }
+
+    function renderBlast(topic) {
+      const items = topic.blast;
+      const total = items.length;
+      const index = state.blast.index;
+      const item = items[index];
+      updateMiniPanel(`${Math.min(index + 1, total)} / ${total}`, state.blast.score);
+
+      if (!state.blast.started) {
+        viewer.innerHTML = `
+          ${headerHTML("Blast", "Modo rápido. Responde conceptos clave antes de que se termine el tiempo.")}
+          <div class="blast-box">
+            <div class="timer-pill">⏱️ Tiempo inicial: 45 segundos</div>
+            <p style="color:var(--muted); line-height:1.6;">Responde lo más rápido que puedas. Cada acierto suma un punto.</p>
+            <button class="btn" id="startBlast">Empezar Blast</button>
+          </div>
+        `;
+        document.getElementById("startBlast").addEventListener("click", () => {
+          state.blast.started = true;
+          state.blast.timer = setInterval(() => {
+            state.blast.secondsLeft -= 1;
+            if (state.blast.secondsLeft <= 0) {
+              clearInterval(state.blast.timer);
+              state.blast.timer = null;
+              renderViewer();
+              return;
+            }
+            const timerEl = document.getElementById("blastTimer");
+            if (timerEl) timerEl.textContent = `${state.blast.secondsLeft}s`;
+          }, 1000);
+          renderViewer();
+        });
+        return;
+      }
+
+      if (state.blast.secondsLeft <= 0 || !item) {
+        if (state.blast.timer) clearInterval(state.blast.timer);
+        state.blast.timer = null;
+        viewer.innerHTML = `
+          ${headerHTML("Blast", "Se terminó el tiempo.")}
+          <div class="result-box">
+            <div class="scoreline">Puntaje: ${state.blast.score}</div>
+            <p>Respondidas: ${Math.min(index, total)} de ${total} preguntas.</p>
+          </div>
+          <div class="flash-controls">
+            <button class="btn" id="restartBlast">Jugar otra vez</button>
+          </div>
+        `;
+        document.getElementById("restartBlast").addEventListener("click", () => resetModeState("blast"));
+        return;
+      }
+
+      viewer.innerHTML = `
+        ${headerHTML("Blast", "Contesta rápido. No lo pienses demasiado.")}
+        <div class="blast-box">
+          <div class="timer-pill">⚡ Tiempo restante: <span id="blastTimer">${state.blast.secondsLeft}s</span></div>
+          <div class="question-title">${item.question}</div>
+          <input id="blastInput" class="text-input" type="text" placeholder="Escribe la respuesta" />
+          <button class="btn" id="checkBlast">Responder</button>
+          <div id="blastFeedback"></div>
+        </div>
+      `;
+
+      document.getElementById("checkBlast").addEventListener("click", () => {
+        const value = normalize(document.getElementById("blastInput").value);
+        const good = value.includes(normalize(item.answer)) || normalize(item.answer).includes(value);
+        if (good) state.blast.score += 1;
+        document.getElementById("blastFeedback").innerHTML = `
+          <div class="feedback">
+            <strong>${good ? "✅ Bien" : "❌ No exactamente"}</strong><br>
+            Respuesta esperada: <strong>${item.answer}</strong>
+          </div>
+          <div class="flash-controls">
+            <button class="ghost-btn" id="nextBlast">Siguiente ➡️</button>
+          </div>
+        `;
+        document.getElementById("checkBlast").disabled = true;
+        document.getElementById("blastInput").disabled = true;
+        document.getElementById("nextBlast").addEventListener("click", () => {
+          state.blast.index += 1;
+          renderViewer();
+        });
+        updateMiniPanel(`${index + 1} / ${total}`, state.blast.score);
+      });
+    }
+
+    function renderCombine(topic) {
+      const pairs = topic.combine.slice(0, 4);
+      const leftItems = pairs.map((pair, idx) => ({ ...pair, idx }));
+      const rightItems = shuffle(pairs.map((pair, idx) => ({ text: pair.right, idx })));
+      const matchedIds = state.combine.matched;
+      updateMiniPanel(`${matchedIds.length} / ${pairs.length}`, matchedIds.length);
+
+      viewer.innerHTML = `
+        ${headerHTML("Combinar", "Selecciona un término y luego su definición correcta.")}
+        <div class="combine-box">
+          <div class="match-grid">
+            <div class="match-column">
+              <h4>Términos</h4>
+              ${leftItems.map(item => `
+                <button class="match-btn ${matchedIds.includes(item.idx) ? "correct" : ""}" data-side="left" data-id="${item.idx}" ${matchedIds.includes(item.idx) ? "disabled" : ""}>
+                  ${item.left}
+                </button>
+              `).join("")}
+            </div>
+            <div class="match-column">
+              <h4>Definiciones</h4>
+              ${rightItems.map(item => `
+                <button class="match-btn ${matchedIds.includes(item.idx) ? "correct" : ""}" data-side="right" data-id="${item.idx}" ${matchedIds.includes(item.idx) ? "disabled" : ""}>
+                  ${item.text}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+          <div id="combineFeedback"></div>
+        </div>
+      `;
+
+      document.querySelectorAll(".match-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const side = btn.dataset.side;
+          const id = Number(btn.dataset.id);
+
+          if (side === "left") state.combine.selectedLeft = id;
+          if (side === "right") state.combine.selectedRight = id;
+
+          document.querySelectorAll(`.match-btn[data-side="${side}"]`).forEach(b => b.style.outline = "none");
+          btn.style.outline = "2px solid #46c2ff";
+
+          if (state.combine.selectedLeft !== null && state.combine.selectedRight !== null) {
+            const ok = state.combine.selectedLeft === state.combine.selectedRight;
+            if (ok && !state.combine.matched.includes(id)) {
+              state.combine.matched.push(id);
+            }
+            document.getElementById("combineFeedback").innerHTML = `
+              <div class="feedback">
+                <strong>${ok ? "✅ Muy bien" : "❌ No coincide"}</strong><br>
+                ${ok ? "Hiciste una combinación correcta." : "Intenta otra vez con otra definición."}
+              </div>
+            `;
+            state.combine.selectedLeft = null;
+            state.combine.selectedRight = null;
+            setTimeout(() => renderViewer(), 700);
+          }
+        });
+      });
+
+      if (matchedIds.length === pairs.length) {
+        viewer.innerHTML += `
+          <div class="result-box" style="margin-top:16px;">
+            <div class="scoreline">Completaste todas las combinaciones 🎉</div>
+          </div>
+        `;
+      }
+    }
+
+    function renderAll() {
+      renderTopicCards();
+      renderModeCards();
+      renderViewer();
+    }
+
+    document.getElementById("resetBtn").addEventListener("click", () => resetModeState(currentMode));
+
+    document.getElementById("randomThemeBtn").addEventListener("click", () => {
+      const keys = Object.keys(topics);
+      currentTopic = keys[Math.floor(Math.random() * keys.length)];
+      resetModeState(currentMode);
+      renderAll();
+    });
+
+    document.getElementById("randomModeBtn").addEventListener("click", () => {
+      const ids = modes.map(mode => mode.id);
+      currentMode = ids[Math.floor(Math.random() * ids.length)];
+      resetModeState(currentMode);
+      renderAll();
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
